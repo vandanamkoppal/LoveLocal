@@ -1,0 +1,32 @@
+def maximalRectangle(matrix):
+    if not matrix or not matrix[0]:
+        return 0
+    
+    m, n = len(matrix), len(matrix[0])
+    heights = [0] * n
+    max_area = 0
+    
+    for i in range(m):
+        heights = [heights[j] + 1 if matrix[i][j] == '1' else 0 for j in range(n)]
+        
+
+        stack = []
+        for j in range(n):
+            while stack and heights[j] < heights[stack[-1]]:
+                height = heights[stack.pop()]
+                width = j if not stack else j - stack[-1] - 1
+                max_area = max(max_area, height * width)
+            stack.append(j)
+
+
+        while stack:
+            height = heights[stack.pop()]
+            width = n if not stack else n - stack[-1] - 1
+            max_area = max(max_area, height * width)
+    
+    return max_area
+
+
+matrix = [["0", "1"], ["1", "0"]]
+output_result = maximalRectangle(matrix)
+print("Output Result:", output_result)
