@@ -1,0 +1,10 @@
+def shortestPalindrome(s):
+    n = len(s)
+    for i in range(n - 1, -1, -1):
+        if s[:i + 1] == s[i::-1]:
+            return s[i + 1:][::-1] + s
+    return s
+
+input_string = "abcd"
+result = shortestPalindrome(input_string)
+print("Shortest Palindrome:", result)
